@@ -1,7 +1,7 @@
 import requests
 import json
 
-# Read the contents of the "keyword.txt" file
+# Read the contents of the "keywords.txt" file
 with open("keywords.txt", "r") as file:
     keywords = file.read().strip()
 
