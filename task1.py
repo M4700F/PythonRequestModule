@@ -84,10 +84,6 @@ def generate_keywords(users_file, pass_file):
 
                 filekeyword.write(keyword)
 
-if len(sys.argv) != 3:
-    print("Usage: python task1.py <users_file> <pass_file>")
-    sys.exit(1)
-
 users_file = sys.argv[1]
 pass_file = sys.argv[2]
 

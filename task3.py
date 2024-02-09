@@ -1,18 +1,39 @@
+# import requests
+# import json
+
+# # Read the contents of the "keywords.txt" file
+# with open("keywords.txt", "r") as file:
+#     keywords = file.read().strip()
+
+# # Create a JSON payload
+# payload = {
+#     "keywords": keywords
+# }
+
+# # Send the JSON payload to the server
+# url = "http://www.example.com"
+# response = requests.post(url, json=payload)
+
+# # Print the response from the server
+# print(response.text)
+
 import requests
-import json
+import sys
 
-# Read the contents of the "keywords.txt" file
-with open("keywords.txt", "r") as file:
-    keywords = file.read().strip()
+keywords_file = sys.argv[1]
 
-# Create a JSON payload
-payload = {
-    "keywords": keywords
-}
-
-# Send the JSON payload to the server
 url = "http://www.example.com"
-response = requests.post(url, json=payload)
 
-# Print the response from the server
-print(response.text)
+with open(keywords_file, "r") as file:
+    lines = file.readlines()
+    
+    for line in lines:
+        keyword = line.strip()
+        
+        payload = {
+            "password": keyword
+        }
+        
+        response = requests.post(url, json=payload)
+        
+        print(response.text)
