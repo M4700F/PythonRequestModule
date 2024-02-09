@@ -40,27 +40,55 @@
 # filepass.close()
 # filekeyword.close()
 
-fileusers = open("users.csv", "r")
-filepass = open("pass.csv", "r")
-filekeyword = open("keywords.txt", "w")
+# fileusers = open("users.csv", "r")
+# filepass = open("pass.csv", "r")
+# filekeyword = open("keywords.txt", "w")
 
-users_lines = fileusers.readlines()
+# users_lines = fileusers.readlines()
 
-for lineusers in users_lines:
-    lineusers = lineusers.strip()
+# for lineusers in users_lines:
+#     lineusers = lineusers.strip()
 
-    filepass.seek(0)  # Reset pass.csv to the beginning
-    for linepass in filepass:
-        linepass = linepass.strip()
+#     filepass.seek(0)  # Reset pass.csv to the beginning
+#     for linepass in filepass:
+#         linepass = linepass.strip()
 
-        users = lineusers[:3]
+#         users = lineusers[:3]
 
-        password = linepass[-4:]
+#         password = linepass[-4:]
 
-        keyword = users + password + "\n"
+#         keyword = users + password + "\n"
 
-        filekeyword.write(keyword)
+#         filekeyword.write(keyword)
 
-fileusers.close()
-filepass.close()
-filekeyword.close()
+# fileusers.close()
+# filepass.close()
+# filekeyword.close()
+
+import sys
+
+def generate_keywords(users_file, pass_file):
+    with open(users_file, "r") as fileusers, open(pass_file, "r") as filepass, open("keywords.txt", "w") as filekeyword:
+        users_lines = fileusers.readlines()
+
+        for lineusers in users_lines:
+            lineusers = lineusers.strip()
+
+            filepass.seek(0)  # Reset pass.csv to the beginning
+            for linepass in filepass:
+                linepass = linepass.strip()
+
+                users = lineusers[:3]
+                password = linepass[-4:]
+                keyword = users + password + "\n"
+
+                filekeyword.write(keyword)
+
+if len(sys.argv) != 3:
+    print("Usage: python task1.py <users_file> <pass_file>")
+    sys.exit(1)
+
+users_file = sys.argv[1]
+pass_file = sys.argv[2]
+
+generate_keywords(users_file, pass_file)
